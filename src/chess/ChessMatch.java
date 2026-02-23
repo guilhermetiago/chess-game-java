@@ -27,18 +27,19 @@ public class ChessMatch {
         return mat;
     }
 
-    public ChessPiece performChessMove(ChessPosition sourcePosition,  ChessPosition targetPosition) {
-        Position source = sourcePosition.toPosition();
-        Position target = targetPosition.toPosition();
-        validateSourcePosition(source);
-        Piece capturedPiece = makeMove(source, target);
-        return (ChessPiece) capturedPiece;
-    }
-
     public boolean[][] possibleMoves(ChessPosition sourcePosition) {
         Position position = sourcePosition.toPosition();
         validateSourcePosition(position);
         return board.piece(position).possibleMoves();
+    }
+
+    public ChessPiece performChessMove(ChessPosition sourcePosition,  ChessPosition targetPosition) {
+        Position source = sourcePosition.toPosition();
+        Position target = targetPosition.toPosition();
+        validateSourcePosition(source);
+        validateTargetPosition(source, target);
+        Piece capturedPiece = makeMove(source, target);
+        return (ChessPiece) capturedPiece;
     }
 
     private Piece makeMove(Position source, Position target) {
@@ -52,8 +53,8 @@ public class ChessMatch {
         if (!board.thereIsPiece(position)) {
             throw new ChessException("Theres is no piece on source position");
         }
-        if (!board.piece(position).isThereAnyPossibleMoves()) {
-            throw new ChessException("There is no possible moves for the chosen position");
+        if (!board.piece(position).isThereAnyPossibleMove()) {
+            throw new ChessException("There is no moves for the chosen piece");
         }
     }
 

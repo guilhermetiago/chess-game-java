@@ -45,7 +45,7 @@ public class UI {
             int row  = Integer.parseInt(s.substring(1));
             return new ChessPosition(column, row);
         }   catch (RuntimeException e) {
-            throw new InputMismatchException("Error reading chess position");
+            throw new InputMismatchException("There is no possible moves for the chosen piece");
         }
     }
 
@@ -74,7 +74,7 @@ public class UI {
     private static void printPiece(ChessPiece piece, boolean background) {
 
         if (background) {
-            System.out.println(ANSI_BLUE_BACKGROUND);
+            System.out.print(ANSI_BLUE_BACKGROUND);
         }
         if (piece == null) {
             System.out.print("- " + ANSI_RESET);
