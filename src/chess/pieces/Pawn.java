@@ -20,7 +20,7 @@ public class Pawn extends ChessPiece {
         if (getColor() == Color.WHITE) {
 
             p.setValues(position.getRow() - 1, position.getColumn());
-            if (getBoard().positionExists(p) && !getBoard().thereIsPiece(p)) {
+            if (getBoard().positionExists(p) && !getBoard().thereIsPiece(p) || isThereOpponentPiece(p)) {
                 mat[p.getRow()][p.getColumn()] = true;
             }
 
